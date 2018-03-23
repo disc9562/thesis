@@ -1,1 +1,8 @@
 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
+
+jmeter cli install plugins
+
+ java -cp /apache-jmeter-3.1/lib/ext/jmeter-plugins-manager-*.jar org.jmeterplugins.repository.PluginManagerCMDInstaller 
+
+chromedriver 
+ apt-get install libxi6 libgconf-2-4
