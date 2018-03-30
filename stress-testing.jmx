@@ -18,7 +18,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">50</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -35,7 +35,12 @@
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig guiclass="com.googlecode.jmeter.plugins.webdriver.config.gui.ChromeDriverConfigGui" testclass="com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig" testname="jp@gc - Chrome Driver Config" enabled="true">
+        <com.googlecode.jmeter.plugins.webdriver.config.RemoteDriverConfig guiclass="com.googlecode.jmeter.plugins.webdriver.config.gui.RemoteDriverConfigGui" testclass="com.googlecode.jmeter.plugins.webdriver.config.RemoteDriverConfig" testname="jp@gc - Remote Driver Config" enabled="true">
+          <stringProp name="RemoteDriverConfig.general.selenium.grid.url">http://localhost:4444/wd/hub</stringProp>
+          <stringProp name="RemoteDriverConfig.general.selenium.capability">CHROME</stringProp>
+        </com.googlecode.jmeter.plugins.webdriver.config.RemoteDriverConfig>
+        <hashTree/>
+        <com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig guiclass="com.googlecode.jmeter.plugins.webdriver.config.gui.ChromeDriverConfigGui" testclass="com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig" testname="jp@gc - Chrome Driver Config" enabled="false">
           <stringProp name="WebDriverConfig.proxy_type">SYSTEM</stringProp>
           <stringProp name="WebDriverConfig.proxy_pac_url"></stringProp>
           <stringProp name="WebDriverConfig.http_host"></stringProp>
@@ -68,10 +73,12 @@ WDS.sampleResult.sampleStart(); //captures sampler&apos;s start time
 WDS.sampleResult.getLatency();
 WDS.log.info(&quot;Sample started&quot;);
 
-WDS.browser.get(&apos;https://www.w3.org/2010/05/video/mediaevents&apos;); //opens website specified in &apos;http://duckduckgo.com&apos;
-var video = WDS.browser.findElement(pkg.By.id(&apos;video&apos;))
-var time =  WDS.browser.executeScript(&quot;return document.getElementById(&apos;video&apos;).currentTime&quot;)
-WDS.log.info(&quot;tiiiiiime&quot; + WDS.browser.executeScript(&quot;return document.getElementById(&apos;video&apos;).currentTime&quot;))
+WDS.browser.get(&apos;http://140.124.181.149:3030&apos;); //opens website specified in &apos;http://duckduckgo.com&apos;
+//var button = WDS.browser.executeScript(&quot;return document.getElementsByTagName(&apos;button&apos;)&quot;)
+//WDS.log.info(button)
+java.lang.Thread.sleep(800)
+var time =  WDS.browser.executeScript(&quot;return document.getElementById(&apos;currentAudio&apos;).currentTime&quot;)
+WDS.log.info(&quot;tiiiiiime&quot; + WDS.browser.executeScript(&quot;return document.getElementById(&apos;currentAudio&apos;).currentTime&quot;))
 //WDS.log.info(&quot;video Time &quot; + video)
 var vars = org.apache.jmeter.threads.JMeterContextService.getContext().getVariables()
 vars.put(&apos;webTime&apos;,time)
@@ -95,23 +102,7 @@ WDS.sampleResult.sampleEnd();
           <stringProp name="WebDriverSampler.language">javascript</stringProp>
         </com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler>
         <hashTree/>
-        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-          <stringProp name="BeanShellAssertion.query">//double webTime = 0.0;
-double webTime = Double.parseDouble(vars.get(&quot;webTime&quot;));
-double serverTime = 0.0;
-//double serverTime = Double.parseDouble(vars.get(&quot;serverTime&quot;));
-
-//print (webTime);
-//print(serverTime);
-print (vars.get(&quot;webTime&quot;));
-//print(vars.get(&quot;serverTime&quot;))
-//print (&quot;somethgin&quot;);</stringProp>
-          <stringProp name="BeanShellAssertion.filename"></stringProp>
-          <stringProp name="BeanShellAssertion.parameters"></stringProp>
-          <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-        </BeanShellAssertion>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -137,6 +128,22 @@ print (vars.get(&quot;webTime&quot;));
             <stringProp name="script">vars.put(&quot;serverTime&quot;, prev.getResponseDataAsString());
 //print(prev.getResponseDataAsString());</stringProp>
           </BeanShellPostProcessor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">double webTime = Double.parseDouble(vars.get(&quot;webTime&quot;));
+double serverTime = Double.parseDouble(vars.get(&quot;serverTime&quot;));
+
+print (vars.get(&quot;webTime&quot;));
+print(vars.get(&quot;serverTime&quot;));
+if(serverTime - webTime &gt; 0.5){
+	Failure = true;
+	FailureMessage = &quot;Too lag &quot; + String.valueOf(serverTime - webTime) + &quot;s&quot;;
+}
+</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters"></stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="檢視結果樹" enabled="true">
