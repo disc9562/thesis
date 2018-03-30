@@ -95,7 +95,23 @@ WDS.sampleResult.sampleEnd();
           <stringProp name="WebDriverSampler.language">javascript</stringProp>
         </com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+          <stringProp name="BeanShellAssertion.query">//double webTime = 0.0;
+double webTime = Double.parseDouble(vars.get(&quot;webTime&quot;));
+//double serverTime = 0.0;
+double serverTime = Double.parseDouble(vars.get(&quot;serverTime&quot;));
+
+//print (webTime);
+//print(serverTime);
+print (vars.get(&quot;webTime&quot;));
+print(vars.get(&quot;serverTime&quot;))
+//print (&quot;somethgin&quot;);</stringProp>
+          <stringProp name="BeanShellAssertion.filename"></stringProp>
+          <stringProp name="BeanShellAssertion.parameters"></stringProp>
+          <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+        </BeanShellAssertion>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -122,29 +138,7 @@ WDS.sampleResult.sampleEnd();
 //print(prev.getResponseDataAsString());</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
-          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-            <stringProp name="BeanShellAssertion.query">//double webTime = 0.0;
-double webTime = Double.parseDouble(vars.get(&quot;webTime&quot;));
-//double serverTime = 0.0;
-double serverTime = Double.parseDouble(vars.get(&quot;serverTime&quot;));
-
-//print (webTime);
-//print(serverTime);
-print (vars.get(&quot;webTime&quot;));
-print(vars.get(&quot;serverTime&quot;))
-//print (&quot;somethgin&quot;);</stringProp>
-            <stringProp name="BeanShellAssertion.filename"></stringProp>
-            <stringProp name="BeanShellAssertion.parameters"></stringProp>
-            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-          </BeanShellAssertion>
-          <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="檢視結果樹" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
