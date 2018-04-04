@@ -135,8 +135,8 @@ WDS.sampleResult.sampleEnd();
             <stringProp name="BeanShellAssertion.query">double webTime = Double.parseDouble(vars.get(&quot;webTime&quot;));
 double serverTime = Double.parseDouble(vars.get(&quot;serverTime&quot;));
 
-print (vars.get(&quot;webTime&quot;));
-print(vars.get(&quot;serverTime&quot;));
+//print (vars.get(&quot;webTime&quot;));
+//print(vars.get(&quot;serverTime&quot;));
 if(serverTime - webTime &gt; 0.5){
 	Failure = true;
 	FailureMessage = &quot;Too lag &quot; + String.valueOf(serverTime - webTime) + &quot;s&quot;;
