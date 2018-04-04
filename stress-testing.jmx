@@ -27,41 +27,10 @@
         <longProp name="ThreadGroup.end_time">1522659216000</longProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="false">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="serverTime" elementType="Argument">
-              <stringProp name="Argument.name">serverTime</stringProp>
-              <stringProp name="Argument.value"></stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
-        <hashTree/>
         <com.googlecode.jmeter.plugins.webdriver.config.RemoteDriverConfig guiclass="com.googlecode.jmeter.plugins.webdriver.config.gui.RemoteDriverConfigGui" testclass="com.googlecode.jmeter.plugins.webdriver.config.RemoteDriverConfig" testname="jp@gc - Remote Driver Config" enabled="true">
           <stringProp name="RemoteDriverConfig.general.selenium.grid.url">http://140.124.181.81:4444/wd/hub</stringProp>
           <stringProp name="RemoteDriverConfig.general.selenium.capability">CHROME</stringProp>
         </com.googlecode.jmeter.plugins.webdriver.config.RemoteDriverConfig>
-        <hashTree/>
-        <com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig guiclass="com.googlecode.jmeter.plugins.webdriver.config.gui.ChromeDriverConfigGui" testclass="com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig" testname="jp@gc - Chrome Driver Config" enabled="false">
-          <stringProp name="WebDriverConfig.proxy_type">SYSTEM</stringProp>
-          <stringProp name="WebDriverConfig.proxy_pac_url"></stringProp>
-          <stringProp name="WebDriverConfig.http_host"></stringProp>
-          <intProp name="WebDriverConfig.http_port">8080</intProp>
-          <boolProp name="WebDriverConfig.use_http_for_all_protocols">true</boolProp>
-          <stringProp name="WebDriverConfig.https_host"></stringProp>
-          <intProp name="WebDriverConfig.https_port">8080</intProp>
-          <stringProp name="WebDriverConfig.ftp_host"></stringProp>
-          <intProp name="WebDriverConfig.ftp_port">8080</intProp>
-          <stringProp name="WebDriverConfig.socks_host"></stringProp>
-          <intProp name="WebDriverConfig.socks_port">8080</intProp>
-          <stringProp name="WebDriverConfig.no_proxy">localhost</stringProp>
-          <boolProp name="WebDriverConfig.maximize_browser">true</boolProp>
-          <boolProp name="WebDriverConfig.reset_per_iteration">false</boolProp>
-          <boolProp name="WebDriverConfig.dev_mode">false</boolProp>
-          <stringProp name="ChromeDriverConfig.chromedriver_path">C:\Users\jay\Desktop\chromedriver.exe</stringProp>
-          <boolProp name="ChromeDriverConfig.android_enabled">false</boolProp>
-          <boolProp name="ChromeDriverConfig.headless_enabled">false</boolProp>
-        </com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig>
         <hashTree/>
         <com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler guiclass="com.googlecode.jmeter.plugins.webdriver.sampler.gui.WebDriverSamplerGui" testclass="com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler" testname="jp@gc - WebDriver Sampler" enabled="true">
           <stringProp name="WebDriverSampler.script">//WDS.sampleResult.sampleStart()
@@ -148,42 +117,6 @@ if(serverTime - webTime &gt; 0.5){
           </BeanShellAssertion>
           <hashTree/>
         </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="檢視結果樹" enabled="false">
-          <boolProp name="ResultCollector.error_logging">false</boolProp>
-          <objProp>
-            <name>saveConfig</name>
-            <value class="SampleSaveConfiguration">
-              <time>true</time>
-              <latency>true</latency>
-              <timestamp>true</timestamp>
-              <success>true</success>
-              <label>true</label>
-              <code>true</code>
-              <message>true</message>
-              <threadName>true</threadName>
-              <dataType>true</dataType>
-              <encoding>false</encoding>
-              <assertions>true</assertions>
-              <subresults>true</subresults>
-              <responseData>false</responseData>
-              <samplerData>false</samplerData>
-              <xml>false</xml>
-              <fieldNames>true</fieldNames>
-              <responseHeaders>false</responseHeaders>
-              <requestHeaders>false</requestHeaders>
-              <responseDataOnError>false</responseDataOnError>
-              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-              <assertionsResultsToSave>0</assertionsResultsToSave>
-              <bytes>true</bytes>
-              <sentBytes>true</sentBytes>
-              <threadCounts>true</threadCounts>
-              <idleTime>true</idleTime>
-              <connectTime>true</connectTime>
-            </value>
-          </objProp>
-          <stringProp name="filename"></stringProp>
-        </ResultCollector>
-        <hashTree/>
       </hashTree>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="工作台" enabled="true">
